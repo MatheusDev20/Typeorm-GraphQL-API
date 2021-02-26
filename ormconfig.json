@@ -1,17 +1,17 @@
 {
     "type":"postgres",
     "host":"localhost",
-    "port": 5432,
+    "port": 5434,
     "username": "postgres",
-    "password": "",
-    "database": "library_manager",
+    "password": "docker",
+    "database": "library",
     "migrations": [
-        "./src/shared/infra/typeorm/migrations/*.ts"
+        "./src/shared/infra/migrations/*.ts"
     ],
     "entities": [
         "./src/modules/**/infra/typeorm/entities/*.ts"
     ],
     "cli": {
-        "migrationsDir":"./src/shared/infra/typeorm/migrations"
+        "migrationsDir":"./src/shared/infra/migrations"
     }
 }

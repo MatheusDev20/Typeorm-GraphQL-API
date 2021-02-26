@@ -1,12 +1,25 @@
+import 'reflect-metadata';
 import express from 'express';
+import { createConnection } from 'typeorm';
+import { ApolloServer } from 'apollo-server-express';
+import { buildSchema } from 'type-graphql';
+import StartResolver from './Resolvers/ServerStartedResolver';
 
-const app = express();
+(async () => {
+    const app = express();
 
-app.get('/', (request, response) =>
-    response.json({
-        message: 'Typeorm GraphQL Project',
-    }),
-);
-app.listen(3333, () => {
-    console.log('Back-end started in 3333 port!');
-});
+    await createConnection();
+
+    const apolloServer = new ApolloServer({
+        schema: await buildSchema({
+            resolvers: [StartResolver],
+        }),
+        context: ({ req, res }) => ({ req, res }),
+    });
+
+    apolloServer.applyMiddleware({ app, cors: false });
+
+    app.listen(3333, () => {
+        console.log('Express Apollo server started');
+    });
+})();

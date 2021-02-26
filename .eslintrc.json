@@ -29,13 +29,13 @@
           {
             "ts": "never"
           }
-        ]
+        ],
+        "class-methods-use-this":"off"
       },
       "settings": {
         "import/resolver": {
           "typescript": {
           }
-        },
-        "class-methods-use-this":"off"
+        }
       }
 }
